@@ -1,0 +1,8 @@
+{
+  "recommendations": [
+    "jnoortheen.nix-ide",
+    "editorconfig.editorconfig",
+    "loong-vsx.rust-analyzer",
+    "tamasfe.even-better-toml"
+  ]
+}

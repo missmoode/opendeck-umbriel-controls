@@ -1,0 +1,9 @@
+# template.toml
+
+[catalog.umbriel-controls]
+name = "Umbriel Controls"
+category = "compositor"
+
+[templates.umbriel-controls]
+input_path = "umbriel-controls.json.tmpl"
+output_path = "$XDG_CONFIG_HOME/opendeck/settings/dev.moode.umbriel-controls.sdPlugin/palettes/noctalia.json"

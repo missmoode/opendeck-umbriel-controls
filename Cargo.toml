@@ -1,0 +1,49 @@
+[package]
+name = "umbriel-controls"
+version = "0.1.0"
+edition = "2024"
+license = "GPL-3.0-or-later"
+publish = false
+
+[dependencies]
+umbriel-ipc = { path = "crates/umbriel-ipc" }
+
+openaction = "2.8"
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+tokio = { version = "1.54", features = [
+    "rt-multi-thread",
+    "macros",
+    "process",
+    "net",
+    "io-util",
+    "time",
+    "sync",
+] }
+log = "0.4"
+simplelog = "0.12"
+freedesktop-desktop-entry = "0.8"
+freedesktop-icons = "0.4"
+resvg = "0.49"
+image = { version = "0.25", default-features = false, features = [
+    "png",
+    "jpeg",
+    "webp",
+] }
+base64 = "0.22"
+regex = "1"
+
+[dev-dependencies]
+tempfile = "3"
+tokio = { version = "1.54", features = ["test-util"] }
+
+[package.metadata.umbriel-controls]
+plugin_id = "dev.moode.umbriel-controls.sdPlugin"
+
+[workspace]
+members = ["crates/umbriel-ipc"]
+resolver = "2"
+
+[features]
+default = []
+diagnostics = []

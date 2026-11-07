@@ -1,0 +1,111 @@
+:root {
+  color-scheme: dark;
+}
+
+sdpi-select {
+  color-scheme: dark;
+  --input-bg-color: #3d3d3d;
+  --input-font-color: #d8d8d8;
+}
+
+.uc-global-settings {
+  border-top: 1px solid #555;
+  margin-top: 16px;
+  padding: 8px 0;
+}
+
+.uc-global-settings summary {
+  cursor: pointer;
+  padding: 6px 0;
+  font-weight: 600;
+}
+
+.uc-global-settings .uc-settings-help {
+  margin: 6px 12px;
+  color: #aaa;
+  font-size: 12px;
+}
+
+.uc-settings-help {
+  margin: 6px 12px;
+  color: #aaa;
+  font-size: 12px;
+}
+
+.uc-layout-cycle {
+  width: 100%;
+}
+
+.uc-layout-row {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin: 4px 0;
+}
+
+.uc-layout-row label {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  gap: 6px;
+}
+
+.uc-layout-row button {
+  color: #ddd;
+  background: #3d3d3d;
+  border: 1px solid #666;
+  border-radius: 3px;
+  cursor: pointer;
+  padding: 3px 8px;
+}
+
+.uc-layout-row button:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+/* SDPI fields have a fixed 95px label + 241px control layout. At ordinary
+   OpenDeck inspector widths, two fields fit side by side; stack when narrow. */
+.uc-inspector-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: start;
+  gap: 16px;
+}
+
+.uc-inspector-section {
+  min-width: 0;
+}
+
+.uc-inspector-section sdpi-item {
+  display: block;
+}
+
+.uc-appearance {
+  padding-left: 12px;
+}
+
+.uc-inspector-heading {
+  color: #ddd;
+  font-size: 14px;
+  font-weight: 600;
+  margin: 0 0 12px;
+  padding: 0 0 8px;
+}
+
+.uc-inspector-note {
+  color: #aaa;
+  font-size: 12px;
+  margin: 4px 0 12px;
+}
+
+@media (max-width: 740px) {
+  .uc-inspector-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .uc-appearance {
+    border-left: 0;
+    padding-left: 0;
+  }
+}

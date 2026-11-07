@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="144" height="144" viewBox="0 0 144 144" fill="none">
+  <!-- Layered independent windows, rather than a tiled partition. -->
+  <rect x="9" y="13" width="88" height="78" rx="8" fill="{{MUTED_FILL}}" stroke="{{CHROME_BORDER}}" stroke-width="3"/>
+  <path d="M10 33H96" stroke="{{CHROME_BORDER}}" stroke-width="3"/>
+  <rect x="32" y="34" width="91" height="82" rx="8" fill="{{SECONDARY_FILL}}" stroke="{{CHROME_BORDER}}" stroke-width="3"/>
+  <path d="M33 55H122" stroke="{{CHROME_BORDER}}" stroke-width="3"/>
+  <rect x="55" y="57" width="80" height="74" rx="8" fill="{{ACCENT_FILL}}" stroke="{{CHROME_TEXT}}" stroke-width="3"/>
+  <path d="M56 77H134" stroke="{{CHROME_TEXT}}" stroke-width="3"/>
+</svg>

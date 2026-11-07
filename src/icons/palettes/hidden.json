@@ -1,0 +1,25 @@
+{
+  "muted": {
+    "fill": "#00000000",
+    "stroke": "#00000000",
+    "text": "#F5F3F8"
+  },
+  "secondary": {
+    "fill": "#00000000",
+    "stroke": "#00000000",
+    "text": "#F5F3F8"
+  },
+  "accent": {
+    "fill": "#00000000",
+    "stroke": "#00000000",
+    "text": "#F5F3F8"
+  },
+  "chrome": {
+    "surface": "#171C2EF0",
+    "text": "#F5F3F8",
+    "border": "#9299AC80",
+    "selection": "#8ABAFB",
+    "indicator": "#F1747E",
+    "indicator_border": "#8A3542"
+  }
+}

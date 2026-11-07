@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg"
+     width="144" height="144" viewBox="0 0 144 144" fill="none">
+  <!-- Static action-picker artwork, not a live workspace snapshot. -->
+  <!-- Three-window layout: two stacked left, one tall right. -->
+  <!-- No containing background: that is reserved for active workspaces. -->
+
+  <!-- Window panels -->
+  <rect x="7" y="7" width="63" height="63" rx="11"
+        fill="#596B91" stroke="#29334F" stroke-width="3"/>
+  <rect x="7" y="74" width="63" height="63" rx="11"
+        fill="#B6A4EA" stroke="#42365E" stroke-width="3"/>
+  <rect x="74" y="7" width="63" height="130" rx="11"
+        fill="#7AA3FF" stroke="#244577" stroke-width="3"/>
+
+  <!-- Placeholder application symbol: web browser -->
+  <g fill="none" stroke="#F5F3F8" stroke-width="2.8"
+     stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="38.5" cy="38.5" r="15"/>
+    <path d="M23.5 38.5h30M38.5 23.5c-9 9-9 21 0 30
+             M38.5 23.5c9 9 9 21 0 30"/>
+  </g>
+
+  <!-- Placeholder application symbol: terminal -->
+  <g fill="none" stroke="#242630" stroke-width="3.2"
+     stroke-linecap="round" stroke-linejoin="round">
+    <rect x="22" y="90" width="33" height="31" rx="6"/>
+    <path d="m29 99 7 6-7 6M40 112h8"/>
+  </g>
+
+  <!-- Placeholder application symbol: messaging -->
+  <g fill="none" stroke="#242630" stroke-width="3.5"
+     stroke-linecap="round" stroke-linejoin="round">
+    <path d="M88 65h35v30h-22l-13 10V65z"/>
+    <path d="M96 79h19M96 86h14" stroke-width="2.8"/>
+  </g>
+
+  <!-- Workspace identifier badge, overlaid without shifting the icons. -->
+  <rect x="92" y="4" width="46" height="40" rx="15"
+        fill="#141419F2" stroke="#B6A4EA" stroke-width="2.5"/>
+  <text x="115" y="32" text-anchor="middle"
+        font-family="sans-serif" font-size="25" font-weight="700"
+        fill="#F5F3F8">2</text>
+</svg>

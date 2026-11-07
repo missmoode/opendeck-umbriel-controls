@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <script src="sdpi-components.js"></script>
+    <script src="palette-field.js"></script>
+    <script src="global-settings.js"></script>
+    <link href="pi.css" rel="stylesheet" />
+  </head>
+  <body>
+    <div class="uc-inspector-grid">
+      <section
+        class="uc-inspector-section uc-config"
+        aria-labelledby="uc-config-heading"
+      >
+        <h2 id="uc-config-heading" class="uc-inspector-heading">
+          Configuration
+        </h2>
+        <p class="uc-inspector-note">
+          Press the key to pause sharing of the current screencast target.
+        </p>
+      </section>
+      <section
+        class="uc-inspector-section uc-appearance"
+        aria-labelledby="uc-appearance-heading"
+      >
+        <h2 id="uc-appearance-heading" class="uc-inspector-heading">
+          Appearance
+        </h2>
+        <uc-palette></uc-palette>
+      </section>
+    </div>
+
+    <uc-global-settings></uc-global-settings>
+  </body>
+</html>

@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg"
+     width="144" height="144" viewBox="0 0 144 144" fill="none">
+
+  <g fill="#F5F3F8">
+    <rect x="57" y="48" width="12" height="48" rx="4"/>
+    <rect x="75" y="48" width="12" height="48" rx="4"/>
+  </g>
+
+  <!-- Capture brackets -->
+  <g fill="none" stroke="#D6DCE880" stroke-width="6"
+     stroke-linecap="round" stroke-linejoin="round">
+    <path d="M48 18H28q-10 0-10 10v20"/>
+    <path d="M96 18h20q10 0 10 10v20"/>
+    <path d="M18 96v20q0 10 10 10h20"/>
+    <path d="M126 96v20q0 10-10 10H96"/>
+  </g>
+</svg>

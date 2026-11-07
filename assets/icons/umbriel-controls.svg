@@ -1,0 +1,52 @@
+<!--
+  Umbriel Controls logo.
+  Copyright (c) 2026 missmoode.
+  All rights reserved. Not licensed under GPL-3.0-or-later.
+  Inspired by the Umbriel mascot from the Noctalia project.
+-->
+<svg xmlns="http://www.w3.org/2000/svg"
+     width="256" height="256" viewBox="0 0 256 256">
+  <title>Umbriel Controls</title>
+  <defs>
+    <linearGradient id="edge-shine"
+                    x1="242" y1="110" x2="94" y2="236"
+                    gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#FFF59B" stop-opacity="0"/>
+      <stop offset="0.13" stop-color="#FFF59B" stop-opacity="0.35"/>
+      <stop offset="0.34" stop-color="#FFF59B" stop-opacity="0.98"/>
+      <stop offset="0.60" stop-color="#FFF59B" stop-opacity="0.83"/>
+      <stop offset="0.83" stop-color="#FFF59B" stop-opacity="0.33"/>
+      <stop offset="1" stop-color="#FFF59B" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+
+      <!-- Physical key shell and recessed display -->
+      <rect id="shell" x="20" y="22" width="220" height="218"
+            rx="42" fill="#110F3D"/>
+      <rect id="channel" x="24" y="26" width="207" height="205"
+            rx="38" fill="#696AC4"/>
+      <rect id="display" x="35" y="38" width="196" height="193"
+            rx="38" fill="#A4A7FB"/>
+
+  <!-- Soft glow and sharper reflection share the same lower-right seam -->
+  <path id="edge-glow"
+        d="M228 108 V191 C228 212 212 228 191 228 H60"
+        fill="none" stroke="url(#edge-shine)"
+        stroke-width="15" stroke-opacity="0.18"
+        stroke-linecap="round" stroke-linejoin="round"/>
+  <path id="edge-highlight"
+        d="M228 116 V191 C228 212 212 228 191 228 H82"
+        fill="none" stroke="url(#edge-shine)"
+        stroke-width="8.5"
+        stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Closed eyes and smile -->
+  <g id="face"
+     transform="translate(6 -3) translate(124 140) scale(1.35) translate(-124 -140)"
+     fill="none" stroke="#110F3D"
+     stroke-width="11" stroke-linecap="round">
+    <path id="left-eye" d="M82 122 Q96 110 110 122" stroke-width="14"/>
+    <path id="right-eye" d="M139 122 Q153 110 167 122" stroke-width="14"/>
+    <path id="mouth" d="M103 157 Q124.5 168 146 157"/>
+  </g>
+</svg>

@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">
+  <rect x="5" y="7" width="54" height="40" rx="5"/>
+  <path d="M32 47v10M20 57h24"/>
+
+  <!-- Follow arrows -->
+  <g transform="translate(32 28) scale(0.9) translate(-32 -38)">
+
+    <!-- Upper arrow: points right -->
+    <path d="M17 37c2-9 12-14 21-10"/>
+
+    <g transform="translate(38 27) rotate(10)">
+      <path d="M-7 -5L0 0L-7 5"/>
+    </g>
+
+    <!-- Lower arrow: points left -->
+    <path d="M47 39c-3 9-12 13-21 9"/>
+
+    <g transform="translate(26 48) rotate(10)">
+      <path d="M7 -5L0 0L7 5"/>
+    </g>
+
+  </g>
+</svg>

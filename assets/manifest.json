@@ -1,0 +1,111 @@
+{
+  "Name": "Umbriel Controls",
+  "Description": "OpenAction controls for Umbriel",
+  "Author": "missmoode",
+  "Version": "0.1.0",
+  "Category": "Umbriel Controls",
+  "Icon": "icons/umbriel-controls",
+  "CategoryIcon": "icons/category",
+  "OS": [
+    {
+      "Platform": "linux"
+    }
+  ],
+  "CodePaths": {
+    "x86_64-unknown-linux-gnu": "umbriel-controls-x86_64-unknown-linux-gnu",
+    "aarch64-unknown-linux-gnu": "umbriel-controls-aarch64-unknown-linux-gnu"
+  },
+  "CodePathLin": "umbriel-controls-x86_64-unknown-linux-gnu",
+  "Actions": [
+    {
+      "Name": "Generic IPC",
+      "UUID": "dev.moode.umbriel-controls.ipc",
+      "Tooltip": "Send a custom Umbriel IPC request",
+      "Icon": "icons/ipc",
+      "States": [
+        {
+          "Image": "icons/ipc"
+        }
+      ],
+      "PropertyInspectorPath": "propertyInspector/ipc.html"
+    },
+    {
+      "Name": "Toggle Scratchpad",
+      "UUID": "dev.moode.umbriel-controls.scratchpad-toggle",
+      "Icon": "icons/scratchpad",
+      "Tooltip": "Tap to show/hide a scratchpad; hold to move a window",
+      "PropertyInspectorPath": "propertyInspector/toggle-scratchpad.html",
+      "Controllers": ["Keypad"],
+      "States": [
+        {
+          "Image": "icons/scratchpad"
+        }
+      ]
+    },
+    {
+      "Name": "Switch Workspace",
+      "UUID": "dev.moode.umbriel-controls.workspace-switch",
+      "Icon": "icons/workspace",
+      "Tooltip": "Tap to switch workspace; hold to move a window or column",
+      "PropertyInspectorPath": "propertyInspector/switch-workspace.html",
+      "DisableAutomaticStates": true,
+      "States": [
+        {
+          "Name": "Inactive",
+          "Image": "icons/workspace",
+          "ShowTitle": false
+        },
+        {
+          "Name": "Active",
+          "Image": "icons/workspace",
+          "ShowTitle": false
+        }
+      ]
+    },
+    {
+      "Name": "Cycle Workspace Layout",
+      "UUID": "dev.moode.umbriel-controls.workspace-layout",
+      "Icon": "icons/workspace-layout",
+      "Tooltip": "Cycle the focused workspace layout; key shows the current layout",
+      "PropertyInspectorPath": "propertyInspector/workspace-layout.html",
+      "Controllers": ["Keypad"],
+      "States": [
+        {
+          "Image": "icons/workspace-layout"
+        }
+      ]
+    },
+    {
+      "Name": "Set Screencast Target",
+      "UUID": "dev.moode.umbriel-controls.screencast-target",
+      "Icon": "icons/screencast-target",
+      "Tooltip": "Select a configured output, capture focused window, or follow focus",
+      "PropertyInspectorPath": "propertyInspector/screencast-target.html",
+      "Controllers": ["Keypad"],
+      "DisableAutomaticStates": true,
+      "States": [
+        {
+          "Name": "Not Selected",
+          "Image": "icons/screencast-target"
+        },
+        {
+          "Name": "Selected",
+          "Image": "icons/screencast-target"
+        }
+      ]
+    },
+    {
+      "Name": "Pause Screencast",
+      "UUID": "dev.moode.umbriel-controls.screencast-clear",
+      "Icon": "icons/screencast-clear",
+      "Tooltip": "Pause sharing of the screencast target",
+      "PropertyInspectorPath": "propertyInspector/screencast-clear.html",
+      "Controllers": ["Keypad"],
+      "States": [
+        {
+          "Image": "icons/screencast-clear"
+        }
+      ]
+    }
+  ]
+}

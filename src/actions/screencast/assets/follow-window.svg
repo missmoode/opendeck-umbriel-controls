@@ -1,0 +1,30 @@
+
+<svg xmlns="http://www.w3.org/2000/svg"
+     width="64" height="64" viewBox="0 0 64 64"
+     fill="none" stroke="currentColor" stroke-width="3.5"
+     stroke-linecap="round" stroke-linejoin="round">
+
+  <!-- Window -->
+  <rect x="7" y="9" width="50" height="46" rx="6"/>
+  <path d="M7 22H57"/>
+  <path d="M17 15h5m6 0h5"/>
+
+  <!-- Follow arrows -->
+  <g transform="translate(32 38) scale(0.8) translate(-32 -38)">
+
+    <!-- Upper arrow: points right -->
+    <path d="M17 37c2-9 12-14 21-10"/>
+
+    <g transform="translate(38 27) rotate(10)">
+      <path d="M-7 -5L0 0L-7 5"/>
+    </g>
+
+    <!-- Lower arrow: points left -->
+    <path d="M47 39c-3 9-12 13-21 9"/>
+
+    <g transform="translate(26 48) rotate(10)">
+      <path d="M7 -5L0 0L7 5"/>
+    </g>
+
+  </g>
+</svg>

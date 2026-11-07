@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <script src="sdpi-components.js"></script>
+    <script src="palette-field.js"></script>
+    <script src="global-settings.js"></script>
+    <link href="pi.css" rel="stylesheet" />
+  </head>
+
+  <body>
+    <div class="uc-inspector-grid">
+      <section
+        class="uc-inspector-section uc-config"
+        aria-labelledby="uc-config-heading"
+      >
+        <h2 id="uc-config-heading" class="uc-inspector-heading">
+          Configuration
+        </h2>
+        <sdpi-item label="Screencast mode">
+          <sdpi-select setting="mode">
+            <option value="focused_window">Focused window at click</option>
+            <option value="programmed_window">
+              Programmable window (hold to assign)
+            </option>
+            <option value="defined_application">Defined application</option>
+            <option value="specific_output">Configured output</option>
+            <option value="follow_window">Follow focused window</option>
+            <option value="follow_output">Follow focused output</option>
+          </sdpi-select>
+        </sdpi-item>
+
+        <sdpi-item id="output-field" label="Output">
+          <sdpi-select
+            setting="output"
+            datasource="getOutputs"
+            placeholder="Choose output"
+            show-refresh
+          >
+          </sdpi-select>
+        </sdpi-item>
+
+        <!-- Keep the source selector above the changing fields so it never moves when switched. -->
+        <sdpi-item id="application-source-field" label="Application source">
+          <sdpi-select setting="application_source" default="installed">
+            <option value="installed">Choose application</option>
+            <option value="custom">Custom matching rule</option>
+          </sdpi-select>
+        </sdpi-item>
+
+        <sdpi-item id="application-field" label="Application">
+          <sdpi-select
+            setting="application"
+            datasource="getApplications"
+            placeholder="Choose application"
+            show-refresh
+          >
+          </sdpi-select>
+          <p class="uc-settings-help">
+            Running-only entries use an exact app ID. Convert to a rule to match
+            titles or processes.
+          </p>
+        </sdpi-item>
+        <sdpi-item id="application-convert-field" label="Matching rule">
+          <sdpi-button id="convert-application"
+            >Convert to matching rule</sdpi-button
+          >
+          <p class="uc-settings-help" id="convert-result">
+            Converts the selected application to an editable app-ID rule.
+          </p>
+        </sdpi-item>
+
+        <sdpi-item id="custom-field" label="Match against">
+          <sdpi-select setting="custom_field" default="app_id">
+            <option value="app_id">Window app ID / WM_CLASS</option>
+            <option value="title">Window title</option>
+            <option value="process_name">Process name (/proc/PID/comm)</option>
+            <option value="executable">
+              Executable basename (/proc/PID/exe)
+            </option>
+          </sdpi-select>
+        </sdpi-item>
+        <sdpi-item id="custom-pattern-field" label="Glob pattern">
+          <sdpi-textfield
+            setting="custom_pattern"
+            placeholder="e.g. steam_app_*"
+            maxlength="256"
+          ></sdpi-textfield>
+        </sdpi-item>
+        <sdpi-item id="custom-case-field" label="Case sensitive">
+          <sdpi-checkbox
+            setting="custom_case_sensitive"
+            label="Match case exactly"
+          ></sdpi-checkbox>
+        </sdpi-item>
+        <sdpi-item id="custom-name-field" label="Application name">
+          <sdpi-textfield
+            setting="custom_name"
+            placeholder="e.g. Stardew Valley"
+            maxlength="24"
+          ></sdpi-textfield>
+        </sdpi-item>
+        <sdpi-item id="custom-help-field" label="Matching">
+          Globs match the complete field: * matches any characters, ? matches
+          one. Process names can be truncated; executable paths may identify
+          Wine rather than the game. Use the app ID when available.
+        </sdpi-item>
+
+        <sdpi-item id="inset-field" label="Main icon">
+          <sdpi-select setting="primary_target" default="next">
+            <option value="next">Next target (current in inset)</option>
+            <option value="current">Current target (next in inset)</option>
+          </sdpi-select>
+        </sdpi-item>
+
+        <sdpi-item id="program-field" label="Programmable window">
+          Hold the key for about one second to assign the focused window. Tap it
+          to select that window. A closed window must be reassigned.
+        </sdpi-item>
+      </section>
+      <section
+        class="uc-inspector-section uc-appearance"
+        aria-labelledby="uc-appearance-heading"
+      >
+        <h2 id="uc-appearance-heading" class="uc-inspector-heading">
+          Appearance
+        </h2>
+        <sdpi-item label="Automatic title">
+          <sdpi-checkbox
+            setting="show_title"
+            label="Use target or mode name"
+          ></sdpi-checkbox>
+        </sdpi-item>
+
+        <uc-palette></uc-palette>
+      </section>
+    </div>
+
+    <script src="screencast-target.js"></script>
+    <uc-global-settings></uc-global-settings>
+  </body>
+</html>

@@ -1,0 +1,26 @@
+
+<svg xmlns="http://www.w3.org/2000/svg"
+     width="144" height="144" viewBox="0 0 144 144" fill="none">
+
+  <!-- Static action-picker artwork, not a live screencast preview. -->
+  <!-- Display symbol -->
+  <rect x="32" y="38" width="80" height="62" rx="9"
+        fill="#7AA3FF" stroke="#244577" stroke-width="4"/>
+
+  <rect x="41" y="47" width="62" height="44" rx="4"
+        fill="#F5F3F8"/>
+
+  <!-- Monitor stand -->
+  <path d="M72 102v14M55 117h34"
+        stroke="#244577" stroke-width="6"
+        stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Capture brackets -->
+  <g fill="none" stroke="#F1747E" stroke-width="6"
+     stroke-linecap="round" stroke-linejoin="round">
+    <path d="M48 18H28q-10 0-10 10v20"/>
+    <path d="M96 18h20q10 0 10 10v20"/>
+    <path d="M18 96v20q0 10 10 10h20"/>
+    <path d="M126 96v20q0 10-10 10H96"/>
+  </g>
+</svg>

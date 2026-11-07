@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <script src="sdpi-components.js"></script>
+    <script src="palette-field.js"></script>
+    <script src="global-settings.js"></script>
+    <link href="pi.css" rel="stylesheet" />
+  </head>
+  <body>
+    <div class="uc-inspector-grid">
+      <section
+        class="uc-inspector-section uc-config"
+        aria-labelledby="uc-config-heading"
+      >
+        <h2 id="uc-config-heading" class="uc-inspector-heading">
+          Configuration
+        </h2>
+        <sdpi-item label="Cycle Order">
+          <div id="layout-cycle" class="uc-layout-cycle"></div>
+        </sdpi-item>
+        <p class="uc-settings-help">
+          Select at least two layouts. Use the arrows to change their order.
+        </p>
+      </section>
+      <section
+        class="uc-inspector-section uc-appearance"
+        aria-labelledby="uc-appearance-heading"
+      >
+        <h2 id="uc-appearance-heading" class="uc-inspector-heading">
+          Appearance
+        </h2>
+        <sdpi-item label="Automatic title">
+          <sdpi-checkbox
+            setting="show_title"
+            label="Use current layout name"
+          ></sdpi-checkbox>
+        </sdpi-item>
+        <uc-palette></uc-palette>
+      </section>
+    </div>
+
+    <uc-global-settings></uc-global-settings>
+    <script src="workspace-layout.js"></script>
+  </body>
+</html>

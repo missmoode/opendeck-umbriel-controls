@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <script src="sdpi-components.js"></script>
+    <script src="palette-field.js"></script>
+    <script src="global-settings.js"></script>
+    <link href="pi.css" rel="stylesheet" />
+  </head>
+
+  <body>
+    <div class="uc-inspector-grid">
+      <section
+        class="uc-inspector-section uc-config"
+        aria-labelledby="uc-config-heading"
+      >
+        <h2 id="uc-config-heading" class="uc-inspector-heading">
+          Configuration
+        </h2>
+        <sdpi-item label="Scratchpad Name">
+          <sdpi-textfield setting="scratchpad" placeholder="Default scratchpad">
+          </sdpi-textfield>
+        </sdpi-item>
+
+        <sdpi-item label="Press">
+          Tap to show or hide. Hold to move the focused window into this
+          scratchpad, or onto the current workspace if it's already in this
+          scratchpad.
+        </sdpi-item>
+
+        <sdpi-item label="After Removing a Window">
+          <sdpi-checkbox
+            setting="hide_on_remove"
+            label="Hide scratchpad"
+            default="true"
+          >
+          </sdpi-checkbox>
+        </sdpi-item>
+      </section>
+      <section
+        class="uc-inspector-section uc-appearance"
+        aria-labelledby="uc-appearance-heading"
+      >
+        <h2 id="uc-appearance-heading" class="uc-inspector-heading">
+          Appearance
+        </h2>
+        <sdpi-item label="Automatic title">
+          <sdpi-checkbox
+            setting="show_title"
+            label="Use scratchpad name"
+          ></sdpi-checkbox>
+        </sdpi-item>
+
+        <uc-palette></uc-palette>
+      </section>
+    </div>
+
+    <uc-global-settings></uc-global-settings>
+  </body>
+</html>

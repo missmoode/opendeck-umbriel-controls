@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="144" height="144" viewBox="0 0 144 144" fill="none">
+  <!-- Recognisable even if Umbriel introduces a new layout mode. -->
+  <rect x="10" y="10" width="124" height="124" rx="12" fill="{{MUTED_FILL}}" stroke="{{CHROME_BORDER}}" stroke-width="4"/>
+  <path d="M72 93V89C72 80 80 77 87 70C96 61 91 46 72 46C58 46 51 55 51 66" stroke="{{CHROME_TEXT}}" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="72" cy="109" r="5" fill="{{CHROME_TEXT}}"/>
+</svg>

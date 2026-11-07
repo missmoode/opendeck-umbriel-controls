@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg"
+     width="144" height="144" viewBox="0 0 144 144" fill="none">
+  {{BACKGROUND}}
+  {{MAIN}}
+  {{INSET}}
+  {{PIN}}
+  <!-- Brackets remain visible over the inset. -->
+  <g stroke="{{BRACKET_STROKE}}" stroke-width="5"
+     stroke-linecap="round" stroke-linejoin="round">
+    <path d="M9 38V20Q9 9 20 9H38"/>
+    <path d="M106 9H124Q135 9 135 20V38"/>
+    <path d="M9 106V124Q9 135 20 135H38"/>
+    <path d="M106 135H124Q135 135 135 124V106"/>
+  </g>
+</svg>

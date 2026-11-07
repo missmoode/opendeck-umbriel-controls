@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg"
+     width="28" height="28" viewBox="0 0 28 28">
+  <title>Umbriel Controls</title>
+
+  <!-- Rounded Stream Deck key, with a slightly heavier bottom-right edge. -->
+  <path id="key"
+        d="M7 2.4 H21 C23.9 2.4 25.6 4.1 25.6 7 V21
+           C25.6 23.9 23.9 25.6 21 25.6 H7
+           C4.1 25.6 2.4 23.9 2.4 21 V7
+           C2.4 4.1 4.1 2.4 7 2.4 Z"
+        fill="none" stroke="#FFFFFF" stroke-width="2.2"
+        stroke-linejoin="round"/>
+
+  <!-- A hint of the recessed display channel on the shadowed sides. -->
+  <path id="inset"
+        d="M4.9 14 V8 C4.9 6.2 6.2 4.9 8 4.9 H15"
+        fill="none" stroke="#FFFFFF" stroke-width="0.8"
+        stroke-opacity="0.42" stroke-linecap="round"/>
+
+  <!-- Closed eyes and symmetrical smile, simplified for 28 px. -->
+  <g id="face" fill="none" stroke="#FFFFFF" stroke-linecap="round">
+    <path id="left-eye" d="M8.1 12.3 Q10.2 10.5 12.3 12.3" stroke-width="1.9"/>
+    <path id="right-eye" d="M16.0 12.3 Q18.1 10.5 20.2 12.3" stroke-width="1.9"/>
+    <path id="mouth" d="M11.0 17.1 Q14.1 19.0 17.2 17.1" stroke-width="1.6"/>
+  </g>
+</svg>

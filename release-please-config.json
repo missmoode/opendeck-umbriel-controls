@@ -1,0 +1,20 @@
+{
+  "packages": {
+    ".": {
+      "release-type": "rust",
+      "include-v-in-tag": true,
+      "extra-files": [
+        {
+          "type": "json",
+          "path": "assets/manifest.json",
+          "jsonpath": "$.Version"
+        }
+      ],
+      "release-as": "0.1.0",
+      "include-component-in-tag": false
+    }
+  },
+  "plugins": [
+    "cargo-workspace"
+  ]
+}

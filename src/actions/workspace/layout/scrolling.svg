@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="144" height="144" viewBox="0 0 144 144" fill="none">
+  <!-- The clipped outside columns suggest horizontal scrolling. -->
+  <rect x="-19" y="23" width="45" height="98" rx="8" fill="{{MUTED_FILL}}" stroke="{{CHROME_BORDER}}" stroke-width="3"/>
+  <rect x="32" y="16" width="36" height="112" rx="8" fill="{{SECONDARY_FILL}}" stroke="{{CHROME_BORDER}}" stroke-width="3"/>
+  <rect x="74" y="16" width="36" height="112" rx="8" fill="{{ACCENT_FILL}}" stroke="{{CHROME_TEXT}}" stroke-width="3"/>
+  <rect x="116" y="23" width="45" height="98" rx="8" fill="{{MUTED_FILL}}" stroke="{{CHROME_BORDER}}" stroke-width="3"/>
+</svg>

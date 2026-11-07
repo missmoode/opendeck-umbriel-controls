@@ -1,0 +1,45 @@
+
+<svg xmlns="http://www.w3.org/2000/svg"
+     width="128" height="128"
+     viewBox="0 0 128 128"
+     fill="none"
+     stroke-linecap="round"
+     stroke-linejoin="round">
+
+  <defs>
+    <!-- Outer crescent, including its dark border. -->
+    <mask id="moon-outline"
+          maskUnits="userSpaceOnUse"
+          mask-type="luminance"
+          x="0" y="0" width="128" height="128">
+      <rect width="128" height="128" fill="black"/>
+      <circle cx="57" cy="64" r="45" fill="white"/>
+      <circle cx="78" cy="53" r="37" fill="black"/>
+    </mask>
+
+    <!-- Inset crescent creates the dark outline. -->
+    <mask id="moon-fill"
+          maskUnits="userSpaceOnUse"
+          mask-type="luminance"
+          x="0" y="0" width="128" height="128">
+      <rect width="128" height="128" fill="black"/>
+      <circle cx="57" cy="64" r="41" fill="white"/>
+      <circle cx="78" cy="53" r="41" fill="black"/>
+    </mask>
+  </defs>
+
+  <!-- Dark crescent outline -->
+  <rect width="128" height="128"
+        fill="#242630"
+        mask="url(#moon-outline)"/>
+
+  <!-- Muted gold crescent fill -->
+  <rect width="128" height="128"
+        fill="#F5C96B"
+        mask="url(#moon-fill)"/>
+
+  <!-- Terminal prompt nestled in the cutout -->
+  <path d="M64 55 L75 65 L64 75 M80 77 H97"
+        stroke="#D9CDA9"
+        stroke-width="5"/>
+</svg>
