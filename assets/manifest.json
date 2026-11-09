@@ -35,7 +35,9 @@
       "Icon": "icons/scratchpad",
       "Tooltip": "Tap to show/hide a scratchpad; hold to move a window",
       "PropertyInspectorPath": "propertyInspector/toggle-scratchpad.html",
-      "Controllers": ["Keypad"],
+      "Controllers": [
+        "Keypad"
+      ],
       "States": [
         {
           "Image": "icons/scratchpad"
@@ -68,7 +70,9 @@
       "Icon": "icons/workspace-layout",
       "Tooltip": "Cycle the focused workspace layout; key shows the current layout",
       "PropertyInspectorPath": "propertyInspector/workspace-layout.html",
-      "Controllers": ["Keypad"],
+      "Controllers": [
+        "Keypad"
+      ],
       "States": [
         {
           "Image": "icons/workspace-layout"
@@ -81,7 +85,9 @@
       "Icon": "icons/screencast-target",
       "Tooltip": "Select a configured output, capture focused window, or follow focus",
       "PropertyInspectorPath": "propertyInspector/screencast-target.html",
-      "Controllers": ["Keypad"],
+      "Controllers": [
+        "Keypad"
+      ],
       "DisableAutomaticStates": true,
       "States": [
         {
@@ -100,7 +106,9 @@
       "Icon": "icons/screencast-clear",
       "Tooltip": "Pause sharing of the screencast target",
       "PropertyInspectorPath": "propertyInspector/screencast-clear.html",
-      "Controllers": ["Keypad"],
+      "Controllers": [
+        "Keypad"
+      ],
       "States": [
         {
           "Image": "icons/screencast-clear"
