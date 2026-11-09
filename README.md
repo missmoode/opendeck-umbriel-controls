@@ -1,7 +1,8 @@
-<h1 align="center">
-  <img src="assets/icons/umbriel-controls.svg" alt="" width="48" height="48">
-  Umbriel Controls
-</h1>
+<p align="center">
+  <img src="assets/icons/umbriel-controls.svg" alt="Umbriel Controls logo" width="90" height="90">
+</p>
+
+<h1 align="center">Umbriel Controls</h1>
 
 <p align="center">
   Control the Umbriel compositor from your Stream Deck.
