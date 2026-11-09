@@ -54,8 +54,11 @@ using OpenDeck's plugin installer.
 
 ### nix-opendeck
 
-You can import the flake for use in
-[nix-opendeck](https://github.com/missmoode/nix-opendeck).
+A cached and verified release of this plugin is provided in
+[nix-opendeck](https://github.com/missmoode/nix-opendeck)'s default catalogue under
+`opendeck-plugins.missmoode.umbriel-controls`.
+
+You can also import this repo's flake and use it directly.
 
 Add it to your flake inputs:
 
