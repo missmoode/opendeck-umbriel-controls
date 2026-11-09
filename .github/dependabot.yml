@@ -1,29 +1,19 @@
 version: 2
+multi-ecosystem-groups:
+  dependency-updates:
+    schedule:
+      interval: "weekly"
+      day: "saturday"
 updates:
-  # Rust crates and Cargo.lock
   - package-ecosystem: "cargo"
     directory: "/"
-    schedule:
-      interval: "weekly"
-    open-pull-requests-limit: 5
-    groups:
-      rust-minor-patch:
-        patterns:
-          - "*"
-        update-types:
-          - "minor"
-          - "patch"
-  # GitHub Actions dependencies
+    patterns: ["*"]
+    multi-ecosystem-group: "dependency-updates"
   - package-ecosystem: "github-actions"
     directory: "/"
-    schedule:
-      interval: "weekly"
-    groups:
-      actions:
-        patterns:
-          - "*"
-  # Nix flake inputs
+    patterns: ["*"]
+    multi-ecosystem-group: "dependency-updates"
   - package-ecosystem: "nix"
     directory: "/"
-    schedule:
-      interval: "monthly"
+    patterns: ["*"]
+    multi-ecosystem-group: "dependency-updates"
