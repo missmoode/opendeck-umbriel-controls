@@ -14,7 +14,7 @@ jobs:
       tag_name: ${{ steps.release.outputs.tag_name }}
     steps:
       - id: release
-        uses: googleapis/release-please-action@v4
+        uses: googleapis/release-please-action@v5
         with:
           # Optional: a GitHub App or PAT token lets the release PR trigger CI.
           # GITHUB_TOKEN-created PRs do not start ordinary pull_request workflows.
@@ -33,14 +33,14 @@ jobs:
     permissions:
       contents: read
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
         with:
           ref: ${{ needs.release.outputs.tag_name }}
       - uses: dtolnay/rust-toolchain@stable
       - uses: Swatinem/rust-cache@v2
       - run: ./build.sh --archive
       - run: unzip -t dist/*.streamDeckPlugin
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         with:
           name: umbriel-controls-${{ matrix.arch }}
           path: dist/*.streamDeckPlugin
@@ -50,7 +50,7 @@ jobs:
     if: needs.release.outputs.release_created == 'true'
     runs-on: ubuntu-24.04
     steps:
-      - uses: actions/download-artifact@v4
+      - uses: actions/download-artifact@v8
         with:
           pattern: umbriel-controls-*
           path: dist
