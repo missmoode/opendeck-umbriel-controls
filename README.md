@@ -157,7 +157,6 @@ chat bot.
 This project is licensed under the GNU General Public License v3.0 or later. The
 umbriel-ipc crate is MIT licensed.
 
-The Umbriel Controls logo is inspired by the Umbriel logo to help communicate
-this project's connection to the compositor. Umbriel Controls is not officially
-affiliated with or endorsed by the Umbriel or wider Noctalia teams — I just
-really like their work.
+The Umbriel Controls logo is inspired by the Umbriel logo to help communicate this
+project's connection to the compositor. Umbriel Controls is not officially affiliated
+with or endorsed by the Umbriel or wider Noctalia teams — I just really like their work.
