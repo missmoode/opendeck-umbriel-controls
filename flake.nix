@@ -42,6 +42,7 @@
                 "--compact-tables"
               ];
               includes = [ "*.md" ];
+              excludes = [ "CHANGELOG.md" ];
             };
 
             yaml = {
@@ -61,7 +62,10 @@
                 "*.css"
                 "*.json"
               ];
-              excludes = [ "assets/propertyInspector/sdpi-components.js" ];
+              excludes = [
+                "assets/propertyInspector/sdpi-components.js"
+                "assets/manifest.json"
+              ];
             };
 
             rust = {
