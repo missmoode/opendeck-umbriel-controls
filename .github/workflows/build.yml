@@ -24,7 +24,6 @@ jobs:
             unzip -Z1 "$archive" | grep -Fx 'dev.moode.umbriel-controls.sdPlugin/LICENSE'
             unzip -Z1 "$archive" | grep -Fx 'dev.moode.umbriel-controls.sdPlugin/crates/umbriel-ipc/LICENSE'
           done
-
   nix:
     runs-on: ubuntu-24.04
     steps:
