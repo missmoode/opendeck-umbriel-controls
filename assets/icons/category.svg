@@ -1,6 +1,10 @@
 <svg xmlns="http://www.w3.org/2000/svg"
      width="28" height="28" viewBox="0 0 28 28">
   <title>Umbriel Controls</title>
+  <desc>
+    Project logo for Umbriel Controls, depicting a smiling lavender
+    Stream Deck key with a translucent bevel and yellow reflections.
+  </desc>
 
   <!-- Rounded Stream Deck key, with a slightly heavier bottom-right edge. -->
   <path id="key"
