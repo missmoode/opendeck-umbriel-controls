@@ -19,6 +19,30 @@ jobs:
           # Optional: a GitHub App or PAT token lets the release PR trigger CI.
           # GITHUB_TOKEN-created PRs do not start ordinary pull_request workflows.
           token: ${{ secrets.RELEASE_PLEASE_TOKEN || secrets.GITHUB_TOKEN }}
+      - name: Checkout generated release PR
+        if: steps.release.outputs.prs_created == 'true'
+        uses: actions/checkout@v7
+        with:
+          token: ${{ secrets.RELEASE_PLEASE_TOKEN || secrets.GITHUB_TOKEN }}
+          fetch-depth: 0
+      - uses: dtolnay/rust-toolchain@stable
+        if: steps.release.outputs.prs_created == 'true'
+      - name: Synchronize release PR lockfile
+        if: steps.release.outputs.prs_created == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.RELEASE_PLEASE_TOKEN || secrets.GITHUB_TOKEN }}
+          RELEASE_PR: ${{ steps.release.outputs.pr }}
+        run: |
+          pr_number="$(jq -er '.number' <<< "$RELEASE_PR")"
+          gh pr checkout "$pr_number"
+          cargo update --workspace
+          if ! git diff --quiet -- Cargo.lock; then
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add Cargo.lock
+            git commit -m "chore: sync release workspace lockfile"
+            git push
+          fi
   build-assets:
     needs: release
     if: needs.release.outputs.release_created == 'true'
@@ -55,8 +79,17 @@ jobs:
           pattern: umbriel-controls-*
           path: dist
           merge-multiple: true
-      - name: Attach plugin archives to GitHub release
+      - name: Attach archives and publish release
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           RELEASE_TAG: ${{ needs.release.outputs.tag_name }}
-        run: gh release upload "$RELEASE_TAG" dist/*.streamDeckPlugin --clobber --repo "$GITHUB_REPOSITORY"
+        run: |
+          version="${RELEASE_TAG#v}"
+          for arch in x86_64 aarch64; do
+            test -f "dist/umbriel-controls-${version}-${arch}-linux.streamDeckPlugin"
+          done
+          gh release upload "$RELEASE_TAG" \
+            "dist/umbriel-controls-${version}-x86_64-linux.streamDeckPlugin" \
+            "dist/umbriel-controls-${version}-aarch64-linux.streamDeckPlugin" \
+            --clobber --repo "$GITHUB_REPOSITORY"
+          gh release edit "$RELEASE_TAG" --draft=false --repo "$GITHUB_REPOSITORY"
