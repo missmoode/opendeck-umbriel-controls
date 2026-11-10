@@ -1,4 +1,3 @@
-
 <svg xmlns="http://www.w3.org/2000/svg"
      width="256" height="256" viewBox="16 16 228 228">
   <title>Umbriel Controls</title>
@@ -55,52 +54,38 @@
       <stop offset="1" stop-color="#FFFDE5" stop-opacity="0"/>
     </linearGradient>
 
+    <!-- Clip to the bevel/channel area so reflections stay out of the shell -->
     <clipPath id="channel-clip">
       <rect x="24" y="26" width="207" height="205" rx="38"/>
     </clipPath>
 
-    <!-- Diffused light within the plastic sidewall -->
     <filter id="edge-diffusion"
             x="-30%" y="-30%" width="160%" height="160%">
       <feGaussianBlur stdDeviation="2.1"/>
     </filter>
 
-    <!-- Softer central concentration without a hard inner ridge -->
     <filter id="edge-gather-soft"
             x="-20%" y="-20%" width="140%" height="140%">
       <feGaussianBlur stdDeviation="0.85"/>
     </filter>
   </defs>
 
-  <!-- Physical key shell and recessed display -->
+  <!-- Physical key shell -->
   <rect id="shell" x="20" y="22" width="220" height="218"
         rx="42" fill="#110F3D"/>
-  <rect id="channel" x="24" y="26" width="207" height="205"
+
+  <!-- Layered channel bevel -->
+  <rect id="channel-shadow" x="24" y="26" width="207" height="205"
+        rx="38" fill="#4F4F9C"/>
+  <rect id="channel" x="29" y="31" width="202" height="200"
         rx="38" fill="#696AC4"/>
 
-  <!-- Ink-blue visible through the bevel, flowing back into the shell -->
-  <path id="bevel-depth"
-        d="M53.45 230.03
-           A38 38 0 0 1 24 193
-           V64
-           A38 38 0 0 1 62 26
-           H193
-           A38 38 0 0 1 230.03 55.45
-           C228.14 47.22 217 31 193 31
-           H62
-           A33 33 0 0 0 29 64
-           V193
-           C29 211 40.5 227.04 53.45 230.03
-           Z"
-        fill="#110F3D" fill-opacity="0.30"/>
-
+  <!-- Display -->
   <rect id="display" x="35" y="38" width="196" height="193"
         rx="38" fill="#A4A7FB"/>
 
   <!-- Refracted yellow light gathering near the outer plastic rim -->
   <g clip-path="url(#channel-clip)">
-
-    <!-- Broad, diffuse light scattered through the bevel -->
     <path id="edge-glow"
           d="M228.8 110 V193
              A35.8 35.8 0 0 1 193 228.8 H60"
@@ -109,7 +94,6 @@
           stroke-linecap="round" stroke-linejoin="round"
           filter="url(#edge-diffusion)"/>
 
-    <!-- Wider concentration of refracted light -->
     <path id="edge-highlight"
           d="M229.1 116 V193
              A36.1 36.1 0 0 1 193 229.1 H82"
@@ -118,7 +102,6 @@
           stroke-linecap="round" stroke-linejoin="round"
           filter="url(#edge-gather-soft)"/>
 
-    <!-- Fine glint at the outer edge of the bevel -->
     <path id="edge-highlight-outer"
           d="M230.2 133 V193
              A37.2 37.2 0 0 1 193 230.2 H98"
@@ -146,15 +129,17 @@
         stroke-width="2.75"
         stroke-linecap="round" stroke-linejoin="round"/>
 
-  <!-- Subtle glints near the two bevel transitions -->
-  <path id="edge-highlight-top-right"
-        d="M202 29.5 C217 30.5 228 41.5 229 55"
-        fill="none" stroke="url(#edge-shine-top-right)"
-        stroke-width="2.5" stroke-linecap="round"/>
-  <path id="edge-highlight-bottom-left"
-        d="M27.5 201 C28.5 215 39 226 53 229"
-        fill="none" stroke="url(#edge-shine-bottom-left)"
-        stroke-width="2.5" stroke-linecap="round"/>
+  <!-- Corner glints, clipped to the bevel/channel area -->
+  <g clip-path="url(#channel-clip)">
+    <path id="edge-highlight-top-right"
+          d="M202 29.5 C217 30.5 228 41.5 229 55"
+          fill="none" stroke="url(#edge-shine-top-right)"
+          stroke-width="2.5" stroke-linecap="round"/>
+    <path id="edge-highlight-bottom-left"
+          d="M27.5 201 C28.5 215 39 226 53 229"
+          fill="none" stroke="url(#edge-shine-bottom-left)"
+          stroke-width="2.5" stroke-linecap="round"/>
+  </g>
 
   <!-- Closed eyes and smile -->
   <g id="face"
