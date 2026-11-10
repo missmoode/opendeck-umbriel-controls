@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.5](https://github.com/missmoode/opendeck-umbriel-controls/compare/v0.1.4...v0.1.5) (2026-11-10)
+
+
+### Bug Fixes
+
+* **logo:** simplify drawing for channel shading and clip corner glints ([efd0967](https://github.com/missmoode/opendeck-umbriel-controls/commit/efd096706a62839ae00977d696db4b29ab0d8e05))
+
 ## [0.1.4](https://github.com/missmoode/opendeck-umbriel-controls/compare/v0.1.3...v0.1.4) (2026-11-10)
 
 
