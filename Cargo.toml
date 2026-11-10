@@ -20,8 +20,6 @@ tokio = { version = "1.54", features = [
     "time",
     "sync",
 ] }
-log = "0.4"
-simplelog = "0.12"
 freedesktop-desktop-entry = "0.8"
 freedesktop-icons = "0.4"
 resvg = "0.49"

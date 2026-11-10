@@ -14,6 +14,24 @@ pub type OutputUpdates = watch::Receiver<Option<OutputSnapshot>>;
 pub type ScreencastUpdates = watch::Receiver<Option<ScreencastCommand>>;
 pub type SessionUpdates = watch::Receiver<u64>;
 
+/// The observer reports availability changes, not every reconnect attempt.
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+enum ConnectionState {
+	Starting,
+	Connected,
+	Unavailable,
+}
+
+impl ConnectionState {
+	fn transition(&mut self, next: Self) -> bool {
+		if *self == next {
+			return false;
+		}
+		*self = next;
+		true
+	}
+}
+
 /// One subscription for the whole plugin; separate channels per family.
 pub struct UmbrielObserver {
 	workspaces: WorkspaceUpdates,
@@ -32,16 +50,25 @@ impl UmbrielObserver {
 		let (session_tx, session) = watch::channel(0_u64);
 
 		tokio::spawn(async move {
+			let mut state = ConnectionState::Starting;
 			loop {
 				let result = match Client::from_environment() {
-					Ok(client) => observe(&client, &ws_tx, &win_tx, &out_tx, &cast_tx).await,
+					Ok(client) => {
+						observe(&client, &ws_tx, &win_tx, &out_tx, &cast_tx, &mut state).await
+					}
 					Err(error) => Err(error),
 				};
 
-				match result {
-					Ok(()) => eprintln!("Umbriel subscription closed"),
-					Err(error) => {
-						eprintln!("Umbriel observer error: {error}")
+				let was_connected = state == ConnectionState::Connected;
+				if state.transition(ConnectionState::Unavailable) {
+					match result {
+						Ok(()) => eprintln!("Umbriel Controls: IPC subscription closed (retrying)"),
+						Err(error) if was_connected => {
+							eprintln!("Umbriel Controls: IPC connection lost: {error} (retrying)")
+						}
+						Err(error) => {
+							eprintln!("Umbriel Controls: IPC unavailable: {error} (retrying)")
+						}
 					}
 				}
 
@@ -94,10 +121,14 @@ async fn observe(
 	windows: &watch::Sender<Option<WindowSnapshot>>,
 	outputs: &watch::Sender<Option<OutputSnapshot>>,
 	screencast: &watch::Sender<Option<ScreencastCommand>>,
+	state: &mut ConnectionState,
 ) -> Result<()> {
 	let mut subscription = client
 		.subscribe(&["workspaces", "windows", "outputs", "screencast"])
 		.await?;
+	if state.transition(ConnectionState::Connected) {
+		eprintln!("Umbriel Controls: IPC subscription connected");
+	}
 
 	while let Some(event) = subscription.next().await? {
 		match event.event.as_str() {
@@ -134,6 +165,17 @@ mod tests {
 	use serde_json::{Value, json};
 	use tokio::io::{AsyncBufReadExt, AsyncWriteExt, BufReader};
 	use tokio::net::UnixListener;
+
+	#[test]
+	fn connection_state_only_reports_transitions() {
+		let mut state = ConnectionState::Starting;
+		assert!(state.transition(ConnectionState::Unavailable));
+		assert!(!state.transition(ConnectionState::Unavailable));
+		assert!(state.transition(ConnectionState::Connected));
+		assert!(!state.transition(ConnectionState::Connected));
+		assert!(state.transition(ConnectionState::Unavailable));
+		assert!(!state.transition(ConnectionState::Unavailable));
+	}
 
 	#[tokio::test]
 	async fn routes_all_families_to_separate_receivers() {
@@ -208,10 +250,19 @@ mod tests {
 		let (win_tx, win_rx) = watch::channel(None::<WindowSnapshot>);
 		let (out_tx, out_rx) = watch::channel(None::<OutputSnapshot>);
 		let (cast_tx, cast_rx) = watch::channel(None::<ScreencastCommand>);
+		let mut state = ConnectionState::Starting;
 
-		observe(&Client::new(socket), &ws_tx, &win_tx, &out_tx, &cast_tx)
-			.await
-			.unwrap();
+		observe(
+			&Client::new(socket),
+			&ws_tx,
+			&win_tx,
+			&out_tx,
+			&cast_tx,
+			&mut state,
+		)
+		.await
+		.unwrap();
+		assert_eq!(state, ConnectionState::Connected);
 
 		// Workspace/window relationship.
 		let workspaces = ws_rx.borrow().clone().unwrap();
