@@ -19,30 +19,6 @@ jobs:
           # Optional: a GitHub App or PAT token lets the release PR trigger CI.
           # GITHUB_TOKEN-created PRs do not start ordinary pull_request workflows.
           token: ${{ secrets.RELEASE_PLEASE_TOKEN || secrets.GITHUB_TOKEN }}
-      - name: Checkout generated release PR
-        if: steps.release.outputs.prs_created == 'true'
-        uses: actions/checkout@v7
-        with:
-          token: ${{ secrets.RELEASE_PLEASE_TOKEN || secrets.GITHUB_TOKEN }}
-          fetch-depth: 0
-      - uses: dtolnay/rust-toolchain@stable
-        if: steps.release.outputs.prs_created == 'true'
-      - name: Synchronize release PR lockfile
-        if: steps.release.outputs.prs_created == 'true'
-        env:
-          GH_TOKEN: ${{ secrets.RELEASE_PLEASE_TOKEN || secrets.GITHUB_TOKEN }}
-          RELEASE_PR: ${{ steps.release.outputs.pr }}
-        run: |
-          pr_number="$(jq -er '.number' <<< "$RELEASE_PR")"
-          gh pr checkout "$pr_number"
-          cargo update --workspace
-          if ! git diff --quiet -- Cargo.lock; then
-            git config user.name "github-actions[bot]"
-            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-            git add Cargo.lock
-            git commit -m "chore: sync release workspace lockfile"
-            git push
-          fi
   build-assets:
     needs: release
     if: needs.release.outputs.release_created == 'true'
