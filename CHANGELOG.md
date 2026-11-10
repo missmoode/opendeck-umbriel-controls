@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.3](https://github.com/missmoode/opendeck-umbriel-controls/compare/v0.1.2...v0.1.3) (2026-11-10)
+
+
+### Bug Fixes
+
+* update logo style to imply geometry ([150d6c2](https://github.com/missmoode/opendeck-umbriel-controls/commit/150d6c24b0bcea4854018e95c2a9e83a82ac8f88))
+
 ## [0.1.2](https://github.com/missmoode/opendeck-umbriel-controls/compare/v0.1.1...v0.1.2) (2026-11-10)
 
 
