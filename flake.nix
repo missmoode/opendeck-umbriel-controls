@@ -153,6 +153,8 @@
         {
           default = pkgs.mkShell {
             packages = with pkgs; [
+              nixd
+              nixfmt
               cargo
               rustc
               rustfmt
