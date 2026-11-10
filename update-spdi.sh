@@ -4,6 +4,7 @@ set -euo pipefail
 url="https://sdpi-components.dev/releases/v4/sdpi-components.js"
 destination="assets/propertyInspector/sdpi-components.js"
 
+cd "$(dirname "$0")"
 mkdir -p "$(dirname "$destination")"
 
 curl --fail --location --retry 3 \
