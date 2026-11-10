@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.4](https://github.com/missmoode/opendeck-umbriel-controls/compare/v0.1.3...v0.1.4) (2026-11-10)
+
+
+### Bug Fixes
+
+* **logging:** reduce log output to what's useful ([59d8841](https://github.com/missmoode/opendeck-umbriel-controls/commit/59d884134ac1836d835ebf8906d10271dfde4a57))
+
 ## [0.1.3](https://github.com/missmoode/opendeck-umbriel-controls/compare/v0.1.2...v0.1.3) (2026-11-10)
 
 
