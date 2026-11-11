@@ -49,8 +49,7 @@ installed.
 
 Download the
 [latest release](https://github.com/missmoode/opendeck-umbriel-controls/releases/latest)
-for your architecture from the releases page, and import the `.streamDeckPlugin` archive
-using OpenDeck's plugin installer.
+and import the `.streamDeckPlugin` archive using OpenDeck's plugin installer.
 
 ### nix-opendeck
 

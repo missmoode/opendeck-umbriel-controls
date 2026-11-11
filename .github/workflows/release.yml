@@ -27,8 +27,10 @@ jobs:
         include:
           - runner: ubuntu-24.04
             arch: x86_64
+            target: x86_64-unknown-linux-gnu
           - runner: ubuntu-24.04-arm
             arch: aarch64
+            target: aarch64-unknown-linux-gnu
     runs-on: ${{ matrix.runner }}
     permissions:
       contents: read
@@ -38,34 +40,58 @@ jobs:
           ref: ${{ needs.release.outputs.tag_name }}
       - uses: dtolnay/rust-toolchain@stable
       - uses: Swatinem/rust-cache@v2
-      - run: ./build.sh --archive
-      - run: unzip -t dist/*.streamDeckPlugin
+      # Artifact uploads are already compressed; only pass along the native binary.
+      - run: ./build.sh --bundle
       - uses: actions/upload-artifact@v7
         with:
           name: umbriel-controls-${{ matrix.arch }}
-          path: dist/*.streamDeckPlugin
+          path: dist/dev.moode.umbriel-controls.sdPlugin/umbriel-controls-${{ matrix.target }}
           if-no-files-found: error
   attach-assets:
     needs: [release, build-assets]
     if: needs.release.outputs.release_created == 'true'
     runs-on: ubuntu-24.04
     steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: ${{ needs.release.outputs.tag_name }}
       - uses: actions/download-artifact@v8
         with:
           pattern: umbriel-controls-*
-          path: dist
+          path: dist/binaries
           merge-multiple: true
-      - name: Attach archives and publish release
+      - name: Assemble universal plugin archive
+        env:
+          RELEASE_TAG: ${{ needs.release.outputs.tag_name }}
+        run: |
+          set -euo pipefail
+          version="${RELEASE_TAG#v}"
+          test "$(jq -er '.Version' assets/manifest.json)" = "$version"
+
+          bundle="dist/dev.moode.umbriel-controls.sdPlugin"
+          mkdir -p "$bundle"
+          cp -a assets/. "$bundle/"
+          install -Dm644 LICENSE "$bundle/LICENSE"
+          install -Dm644 crates/umbriel-ipc/LICENSE "$bundle/crates/umbriel-ipc/LICENSE"
+
+          for target in x86_64-unknown-linux-gnu aarch64-unknown-linux-gnu; do
+            binary="$(jq -er --arg target "$target" '.CodePaths[$target]' assets/manifest.json)"
+            install -m755 "dist/binaries/$binary" "$bundle/$binary"
+          done
+          fallback="$(jq -er '.CodePathLin' assets/manifest.json)"
+          test -x "$bundle/$fallback"
+
+          archive="umbriel-controls-${version}.streamDeckPlugin"
+          (cd dist && zip -qr "$archive" "dev.moode.umbriel-controls.sdPlugin")
+          unzip -t "dist/$archive"
+      - name: Attach archive and publish release
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           RELEASE_TAG: ${{ needs.release.outputs.tag_name }}
         run: |
+          set -euo pipefail
           version="${RELEASE_TAG#v}"
-          for arch in x86_64 aarch64; do
-            test -f "dist/umbriel-controls-${version}-${arch}-linux.streamDeckPlugin"
-          done
           gh release upload "$RELEASE_TAG" \
-            "dist/umbriel-controls-${version}-x86_64-linux.streamDeckPlugin" \
-            "dist/umbriel-controls-${version}-aarch64-linux.streamDeckPlugin" \
+            "dist/umbriel-controls-${version}.streamDeckPlugin" \
             --clobber --repo "$GITHUB_REPOSITORY"
           gh release edit "$RELEASE_TAG" --draft=false --repo "$GITHUB_REPOSITORY"
