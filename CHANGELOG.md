@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.6](https://github.com/missmoode/opendeck-umbriel-controls/compare/v0.1.5...v0.1.6) (2026-11-11)
+
+
+### Bug Fixes
+
+* **ci:** unify release archive ([09d1711](https://github.com/missmoode/opendeck-umbriel-controls/commit/09d17110bb9e404627f94411f9bf3659b0f3ef9b))
+
 ## [0.1.5](https://github.com/missmoode/opendeck-umbriel-controls/compare/v0.1.4...v0.1.5) (2026-11-10)
 
 
