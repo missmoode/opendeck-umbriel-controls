@@ -130,7 +130,37 @@ For syntax, see the [built-in palettes](./src/icons/palettes/).
 
 A Noctalia user template is included within the
 [`noctaliatemplate` directory](./noctaliatemplate/), for syncing with your Noctalia
-theme.
+theme. See the [template setup instructions](./noctaliatemplate/README.md) for manual
+installation.
+
+<details>
+<summary>NixOS / Home Manager setup</summary>
+
+The flake also exports the template as `packages.${system}.noctalia-template`. If you're
+using Noctalia's Home Manager module, declare it in your settings:
+
+```nix
+{ inputs, pkgs, ... }: {
+  programs.noctalia.settings.theme.templates.user."umbriel-controls" = {
+    input_path =
+      "${inputs.umbriel-controls.packages.${pkgs.stdenv.hostPlatform.system}.noctalia-template}";
+    output_path =
+      "$XDG_CONFIG_HOME/opendeck/settings/dev.moode.umbriel-controls.sdPlugin/palettes/noctalia.json";
+  };
+}
+```
+
+This assumes `umbriel-controls` is configured as a flake input and Noctalia's Home
+Manager module is imported. The input template lives in the Nix store, while Noctalia
+writes the generated JSON to OpenDeck's writable configuration directory. Do not declare
+that generated file with Home Manager.
+
+After Noctalia renders the template, select **noctalia (Custom)** in an action's Global
+Settings. You can also set `defaultPalette = "noctalia"` in the Umbriel Controls package
+override to use this palette automatically unless a global or per-button palette is
+selected. No reload hook is needed: the plugin watches for palette changes.
+
+</details>
 
 ### Nix flake
 

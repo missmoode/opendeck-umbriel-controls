@@ -134,6 +134,9 @@
         {
           default = mkUmbrielControls;
           dev = mkUmbrielControls.override { buildFeatures = [ "diagnostics" ]; };
+          noctalia-template = pkgs.writeText "umbriel-controls-noctalia.json.tmpl" (
+            builtins.readFile ./noctaliatemplate/umbriel-controls.json.tmpl
+          );
         }
       );
 
