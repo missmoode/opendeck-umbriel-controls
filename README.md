@@ -22,7 +22,18 @@ It has actions for:
 
 It also looks pretty :) yay
 
-![A Stream Deck profile showing Umbriel Controls workspace buttons, layouts, and colour palettes](./screenshot.png)
+<p align="center">
+  <img
+    src="./screenshot-general.png"
+    alt="A Stream Deck profile showing Umbriel Controls workspace buttons, layouts, and colour palettes"
+    width="49%"
+  />
+  <img
+    src="./screenshot-casting.png"
+    alt="A Stream Deck profile showing multiple uses of the PipeWire screen sharing tools"
+    width="49%"
+  />
+</p>
 
 (The general idea is to pick functionality where visual feedback or the specificity of
 control is useful compared to just a keyboard shortcut.)
