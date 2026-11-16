@@ -3,12 +3,31 @@ use crate::{
 };
 use std::sync::Arc;
 
+// The manifest is rewritten for the development package. Match its UUIDs at
+// compile time so production and development actions can coexist in OpenDeck.
+#[cfg(feature = "development")]
+macro_rules! action_uuid {
+	($name:literal) => {
+		concat!("dev.moode.umbriel-controls-dev.", $name)
+	};
+}
+
+#[cfg(not(feature = "development"))]
+macro_rules! action_uuid {
+	($name:literal) => {
+		concat!("dev.moode.umbriel-controls.", $name)
+	};
+}
+
+pub(crate) use action_uuid;
+
 mod buttons;
 pub mod ipc;
 mod press;
 mod render_queue;
 pub mod scratchpad;
 pub mod screencast;
+pub mod submap;
 mod titles;
 pub mod ui;
 pub mod workspace;
@@ -35,6 +54,7 @@ pub async fn register(observer: &UmbrielObserver, themes: Arc<ThemeManager>) {
 		Arc::clone(&ui),
 	)
 	.await;
+	submap::register(observer.submaps(), Arc::clone(&themes), Arc::clone(&ui)).await;
 	screencast::register(observer, Arc::clone(&icons), themes, ui).await;
 }
 

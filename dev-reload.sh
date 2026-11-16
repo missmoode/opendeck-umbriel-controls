@@ -4,7 +4,7 @@ set -euo pipefail
 cd "$(dirname "$0")"
 
 plugin_id="$(cargo metadata --no-deps --format-version 1 |
-  jq -er '.packages[] | select(.name == "umbriel-controls") | .metadata["umbriel-controls"].plugin_id')"
+  jq -er '.packages[] | select(.name == "umbriel-controls") | .metadata["umbriel-controls"].dev_plugin_id')"
 
 config_dir="${XDG_CONFIG_HOME:-$HOME/.config}/opendeck"
 plugin_dir="$config_dir/plugins"
@@ -17,7 +17,7 @@ if [[ -f "$config_dir/externally-managed-plugins" ]] &&
   exit 1
 fi
 
-nix build .#default -L
+nix build .#dev -L
 
 source="$(realpath "result/$plugin_id")"
 
@@ -27,6 +27,13 @@ mkdir -p "$plugin_dir"
 if [[ -e "$target" && ! -L "$target" ]]; then
   echo "Refusing to replace existing plugin: $target" >&2
   exit 1
+fi
+if [[ -L "$target" ]]; then
+  existing="$(readlink -- "$target")"
+  if [[ "${existing##*/}" != "$plugin_id" ]]; then
+    echo "Refusing to replace unexpected symlink: $target -> $existing" >&2
+    exit 1
+  fi
 fi
 
 ln -sfnT "$source" "$target"

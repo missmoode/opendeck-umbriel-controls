@@ -34,7 +34,7 @@ impl ClearScreencast {
 
 #[async_trait]
 impl Action for ClearScreencast {
-	const UUID: &'static str = "dev.moode.umbriel-controls.screencast-clear";
+	const UUID: &'static str = crate::actions::action_uuid!("screencast-clear");
 	type Settings = Settings;
 
 	async fn will_appear(&self, instance: &Instance, settings: &Settings) -> OpenActionResult<()> {

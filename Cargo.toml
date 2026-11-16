@@ -37,6 +37,7 @@ tokio = { version = "1.54", features = ["test-util"] }
 
 [package.metadata.umbriel-controls]
 plugin_id = "dev.moode.umbriel-controls.sdPlugin"
+dev_plugin_id = "dev.moode.umbriel-controls-dev.sdPlugin"
 
 [workspace]
 members = ["crates/umbriel-ipc"]
@@ -45,3 +46,4 @@ resolver = "2"
 [features]
 default = []
 diagnostics = []
+development = []

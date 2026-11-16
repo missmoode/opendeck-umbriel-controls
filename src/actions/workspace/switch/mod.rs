@@ -74,7 +74,7 @@ impl WorkspaceSwitch {
 
 #[async_trait]
 impl Action for WorkspaceSwitch {
-	const UUID: &'static str = "dev.moode.umbriel-controls.workspace-switch";
+	const UUID: &'static str = crate::actions::action_uuid!("workspace-switch");
 
 	type Settings = Settings;
 

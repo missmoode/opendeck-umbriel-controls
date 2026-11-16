@@ -30,7 +30,7 @@ struct TargetAction {
 
 #[async_trait]
 impl Action for TargetAction {
-	const UUID: &'static str = "dev.moode.umbriel-controls.screencast-target";
+	const UUID: &'static str = crate::actions::action_uuid!("screencast-target");
 	type Settings = Settings;
 
 	async fn will_appear(&self, instance: &Instance, settings: &Settings) -> OpenActionResult<()> {

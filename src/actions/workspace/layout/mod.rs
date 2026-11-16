@@ -70,7 +70,7 @@ impl WorkspaceLayout {
 
 #[async_trait]
 impl Action for WorkspaceLayout {
-	const UUID: &'static str = "dev.moode.umbriel-controls.workspace-layout";
+	const UUID: &'static str = crate::actions::action_uuid!("workspace-layout");
 	type Settings = Settings;
 
 	async fn will_appear(&self, instance: &Instance, settings: &Settings) -> OpenActionResult<()> {
