@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.2.0](https://github.com/missmoode/opendeck-umbriel-controls/compare/v0.1.6...v0.2.0) (2026-11-16)
+
+
+### Features
+
+* **development:** allow separate dev builds alongside production ([b1c11e5](https://github.com/missmoode/opendeck-umbriel-controls/commit/b1c11e56835d9b5d194b429a6e6f147731e50a83))
+* **submap:** add set and reset submap actions ([b1c11e5](https://github.com/missmoode/opendeck-umbriel-controls/commit/b1c11e56835d9b5d194b429a6e6f147731e50a83))
+
 ## [0.1.6](https://github.com/missmoode/opendeck-umbriel-controls/compare/v0.1.5...v0.1.6) (2026-11-11)
 
 
