@@ -2,7 +2,7 @@
   "Name": "Umbriel Controls",
   "Description": "OpenAction controls for Umbriel",
   "Author": "missmoode",
-  "Version": "0.1.6",
+  "Version": "0.2.0",
   "Category": "Umbriel Controls",
   "Icon": "icons/umbriel-controls",
   "CategoryIcon": "icons/category",
@@ -85,11 +85,19 @@
       "Tooltip": "Clear the submap stack and select a configured path",
       "Icon": "icons/submap-set",
       "PropertyInspectorPath": "propertyInspector/submap-set.html",
-      "Controllers": ["Keypad"],
+      "Controllers": [
+        "Keypad"
+      ],
       "DisableAutomaticStates": true,
       "States": [
-        {"Name": "Inactive", "Image": "icons/submap-set"},
-        {"Name": "Active", "Image": "icons/submap-set"}
+        {
+          "Name": "Inactive",
+          "Image": "icons/submap-set"
+        },
+        {
+          "Name": "Active",
+          "Image": "icons/submap-set"
+        }
       ]
     },
     {
@@ -98,11 +106,19 @@
       "Tooltip": "Clear all active submap levels",
       "Icon": "icons/submap-reset",
       "PropertyInspectorPath": "propertyInspector/submap-reset.html",
-      "Controllers": ["Keypad"],
+      "Controllers": [
+        "Keypad"
+      ],
       "DisableAutomaticStates": true,
       "States": [
-        {"Name": "Inactive", "Image": "icons/submap-reset"},
-        {"Name": "Active", "Image": "icons/submap-reset"}
+        {
+          "Name": "Inactive",
+          "Image": "icons/submap-reset"
+        },
+        {
+          "Name": "Active",
+          "Image": "icons/submap-reset"
+        }
       ]
     },
     {
