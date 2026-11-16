@@ -12,6 +12,8 @@ pub type OutputSnapshot = Arc<Vec<Output>>;
 pub type OutputUpdates = watch::Receiver<Option<OutputSnapshot>>;
 
 pub type ScreencastUpdates = watch::Receiver<Option<ScreencastCommand>>;
+/// Outer None = disconnected; inner None = Umbriel's default keybinding context.
+pub type SubmapUpdates = watch::Receiver<Option<Option<String>>>;
 pub type SessionUpdates = watch::Receiver<u64>;
 
 /// The observer reports availability changes, not every reconnect attempt.
@@ -38,6 +40,7 @@ pub struct UmbrielObserver {
 	windows: WindowUpdates,
 	outputs: OutputUpdates,
 	screencast: ScreencastUpdates,
+	submaps: SubmapUpdates,
 	session: SessionUpdates,
 }
 
@@ -47,6 +50,7 @@ impl UmbrielObserver {
 		let (win_tx, windows) = watch::channel(None::<WindowSnapshot>);
 		let (out_tx, outputs) = watch::channel(None::<OutputSnapshot>);
 		let (cast_tx, screencast) = watch::channel(None::<ScreencastCommand>);
+		let (submap_tx, submaps) = watch::channel(None::<Option<String>>);
 		let (session_tx, session) = watch::channel(0_u64);
 
 		tokio::spawn(async move {
@@ -54,7 +58,10 @@ impl UmbrielObserver {
 			loop {
 				let result = match Client::from_environment() {
 					Ok(client) => {
-						observe(&client, &ws_tx, &win_tx, &out_tx, &cast_tx, &mut state).await
+						observe(
+							&client, &ws_tx, &win_tx, &out_tx, &cast_tx, &submap_tx, &mut state,
+						)
+						.await
 					}
 					Err(error) => Err(error),
 				};
@@ -77,6 +84,7 @@ impl UmbrielObserver {
 				win_tx.send_replace(None);
 				out_tx.send_replace(None);
 				cast_tx.send_replace(None);
+				submap_tx.send_replace(None);
 				// A generation cannot be skipped even if receivers coalesce events.
 				session_tx.send_modify(|generation| *generation = generation.wrapping_add(1));
 
@@ -89,6 +97,7 @@ impl UmbrielObserver {
 			windows,
 			outputs,
 			screencast,
+			submaps,
 			session,
 		}
 	}
@@ -109,6 +118,10 @@ impl UmbrielObserver {
 		self.screencast.clone()
 	}
 
+	pub fn submaps(&self) -> SubmapUpdates {
+		self.submaps.clone()
+	}
+
 	pub fn session(&self) -> SessionUpdates {
 		self.session.clone()
 	}
@@ -121,10 +134,11 @@ async fn observe(
 	windows: &watch::Sender<Option<WindowSnapshot>>,
 	outputs: &watch::Sender<Option<OutputSnapshot>>,
 	screencast: &watch::Sender<Option<ScreencastCommand>>,
+	submaps: &watch::Sender<Option<Option<String>>>,
 	state: &mut ConnectionState,
 ) -> Result<()> {
 	let mut subscription = client
-		.subscribe(&["workspaces", "windows", "outputs", "screencast"])
+		.subscribe(&["workspaces", "windows", "outputs", "screencast", "submap"])
 		.await?;
 	if state.transition(ConnectionState::Connected) {
 		eprintln!("Umbriel Controls: IPC subscription connected");
@@ -151,6 +165,10 @@ async fn observe(
 				let command: ScreencastCommand = serde_json::from_value(event.data)?;
 
 				screencast.send_replace(Some(command));
+			}
+			"submap" => {
+				let active: Option<String> = serde_json::from_value(event.data)?;
+				submaps.send_replace(Some(active));
 			}
 			_ => {}
 		}
@@ -192,15 +210,15 @@ mod tests {
 
 			let request: Value = serde_json::from_str(&request_line).unwrap();
 
-			// All four families must use the same subscription.
+			// All five families must use the same subscription.
 			assert_eq!(
 				request["events"],
-				json!(["workspaces", "windows", "outputs", "screencast"])
+				json!(["workspaces", "windows", "outputs", "screencast", "submap"])
 			);
 
-			// Simulate four events arriving on one socket.
+			// Simulate five events arriving on one socket.
 			let messages = format!(
-				"{}\n{}\n{}\n{}\n",
+				"{}\n{}\n{}\n{}\n{}\n",
 				json!({
 					"event": "workspaces",
 					"data": [{
@@ -239,17 +257,19 @@ mod tests {
 						"kind": "output",
 						"output": "DP-1"
 					}
-				})
+				}),
+				json!({"event": "submap", "data": "screenshots"})
 			);
 
 			peer.get_mut().write_all(messages.as_bytes()).await.unwrap();
 		});
 
-		// Four independent receivers, using the actual observer logic.
+		// Five independent receivers, using the actual observer logic.
 		let (ws_tx, ws_rx) = watch::channel(None::<WorkspaceSnapshot>);
 		let (win_tx, win_rx) = watch::channel(None::<WindowSnapshot>);
 		let (out_tx, out_rx) = watch::channel(None::<OutputSnapshot>);
 		let (cast_tx, cast_rx) = watch::channel(None::<ScreencastCommand>);
+		let (submap_tx, submap_rx) = watch::channel(None::<Option<String>>);
 		let mut state = ConnectionState::Starting;
 
 		observe(
@@ -258,6 +278,7 @@ mod tests {
 			&win_tx,
 			&out_tx,
 			&cast_tx,
+			&submap_tx,
 			&mut state,
 		)
 		.await
@@ -288,6 +309,10 @@ mod tests {
 			}
 		);
 
+		assert_eq!(
+			submap_rx.borrow().as_ref().and_then(Option::as_deref),
+			Some("screenshots")
+		);
 		server.await.unwrap();
 	}
 }

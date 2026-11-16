@@ -24,6 +24,18 @@ pub enum Error {
 	#[error("IPC request timed out after {0:?}")]
 	Timeout(Duration),
 
+	#[error("invalid submap path")]
+	InvalidSubmapPath,
+
+	#[error("submap stack exceeds the maximum supported depth ({0})")]
+	SubmapDepthExceeded(usize),
+
+	#[error("submap did not match the requested destination")]
+	SubmapMismatch,
+
+	#[error("submap operation failed: {0}")]
+	SubmapCleanup(String),
+
 	#[error("subscription must include at least one event family")]
 	EmptySubscription,
 }

@@ -80,6 +80,32 @@
       ]
     },
     {
+      "Name": "Set Submap",
+      "UUID": "dev.moode.umbriel-controls.submap-set",
+      "Tooltip": "Clear the submap stack and select a configured path",
+      "Icon": "icons/submap-set",
+      "PropertyInspectorPath": "propertyInspector/submap-set.html",
+      "Controllers": ["Keypad"],
+      "DisableAutomaticStates": true,
+      "States": [
+        {"Name": "Inactive", "Image": "icons/submap-set"},
+        {"Name": "Active", "Image": "icons/submap-set"}
+      ]
+    },
+    {
+      "Name": "Reset Submaps",
+      "UUID": "dev.moode.umbriel-controls.submap-reset",
+      "Tooltip": "Clear all active submap levels",
+      "Icon": "icons/submap-reset",
+      "PropertyInspectorPath": "propertyInspector/submap-reset.html",
+      "Controllers": ["Keypad"],
+      "DisableAutomaticStates": true,
+      "States": [
+        {"Name": "Inactive", "Image": "icons/submap-reset"},
+        {"Name": "Active", "Image": "icons/submap-reset"}
+      ]
+    },
+    {
       "Name": "Set Screencast Target",
       "UUID": "dev.moode.umbriel-controls.screencast-target",
       "Icon": "icons/screencast-target",

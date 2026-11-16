@@ -1,0 +1,25 @@
+
+<svg xmlns="http://www.w3.org/2000/svg"
+     width="144" height="144" viewBox="0 0 144 144" fill="none">
+  <defs>
+    <!-- Shared keycap geometry for both actions. -->
+    <g id="keyboard-keys">
+      <!-- Four aligned upper keys. -->
+      <rect x="24" y="50" width="20" height="18" rx="4"/>
+      <rect x="49" y="50" width="20" height="18" rx="4"/>
+      <rect x="74" y="50" width="20" height="18" rx="4"/>
+      <rect x="99" y="50" width="20" height="18" rx="4"/>
+
+      <!-- Key, spacebar, key. -->
+      <rect x="24" y="77" width="20" height="18" rx="4"/>
+      <rect x="49" y="77" width="45" height="18" rx="4"/>
+      <rect x="99" y="77" width="20" height="18" rx="4"/>
+    </g>
+  </defs>
+
+  {{BACKGROUND}}
+
+  <g opacity="{{KEYBOARD_OPACITY}}">
+    {{KEYBOARD}}
+  </g>
+</svg>

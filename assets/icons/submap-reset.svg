@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="144" height="144" viewBox="0 0 144 144" fill="none">
+  <g>
+    <rect x="13" y="39" width="118" height="66" rx="13"
+          fill="none" stroke="#B6A4EA" stroke-width="5" stroke-dasharray="6 9" stroke-linecap="round"/>
+    <g fill="#B6A4EA" stroke="#42365E" stroke-width="1.4">
+      <!-- Four equally spaced keys, above a key-spacebar-key row. -->
+      <rect x="24" y="50" width="20" height="18" rx="4"/>
+      <rect x="49" y="50" width="20" height="18" rx="4"/>
+      <rect x="74" y="50" width="20" height="18" rx="4"/>
+      <rect x="99" y="50" width="20" height="18" rx="4"/>
+      <rect x="24" y="77" width="20" height="18" rx="4"/>
+      <rect x="49" y="77" width="45" height="18" rx="4"/>
+      <rect x="99" y="77" width="20" height="18" rx="4"/>
+    </g>
+  </g>
+</svg>

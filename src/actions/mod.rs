@@ -27,6 +27,7 @@ mod press;
 mod render_queue;
 pub mod scratchpad;
 pub mod screencast;
+pub mod submap;
 mod titles;
 pub mod ui;
 pub mod workspace;
@@ -53,6 +54,7 @@ pub async fn register(observer: &UmbrielObserver, themes: Arc<ThemeManager>) {
 		Arc::clone(&ui),
 	)
 	.await;
+	submap::register(observer.submaps(), Arc::clone(&themes), Arc::clone(&ui)).await;
 	screencast::register(observer, Arc::clone(&icons), themes, ui).await;
 }
 
