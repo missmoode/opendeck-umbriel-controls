@@ -15,7 +15,7 @@ struct GenericIpcAction {
 
 #[async_trait]
 impl Action for GenericIpcAction {
-	const UUID: &'static str = "dev.moode.umbriel-controls.ipc";
+	const UUID: &'static str = crate::actions::action_uuid!("ipc");
 
 	type Settings = Settings;
 

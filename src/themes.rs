@@ -12,6 +12,9 @@ use tokio::sync::watch;
 
 use crate::icons::palette::{Palette, builtin_palette, parse_palette};
 
+#[cfg(feature = "development")]
+const PLUGIN_ID: &str = "dev.moode.umbriel-controls-dev.sdPlugin";
+#[cfg(not(feature = "development"))]
 const PLUGIN_ID: &str = "dev.moode.umbriel-controls.sdPlugin";
 const DEFAULT_THEME: &str = "builtin:blue";
 

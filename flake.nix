@@ -18,6 +18,7 @@
 
       binaryName = cargoManifest.package.name;
       pluginId = cargoManifest.package.metadata.umbriel-controls.plugin_id;
+      devPluginId = cargoManifest.package.metadata.umbriel-controls.dev_plugin_id;
 
       formatterFor =
         pkgs:
@@ -99,14 +100,20 @@
             {
               buildFeatures ? [ ],
               defaultPalette ? null,
+              development ? false,
             }:
+            let
+              selectedPluginId = if development then devPluginId else pluginId;
+            in
             nix-opendeck.lib.mkRustOpenDeckPlugin pkgs (finalAttrs: {
               pname = "umbriel-controls";
               version = cargoManifest.package.version;
 
               src = ./.;
 
-              inherit pluginId binaryName buildFeatures;
+              pluginId = selectedPluginId;
+              inherit binaryName;
+              buildFeatures = buildFeatures ++ pkgs.lib.optionals development [ "development" ];
 
               binaryInstallPath = "${finalAttrs.binaryName}-${pkgs.stdenv.hostPlatform.rust.rustcTarget}";
 
@@ -118,10 +125,28 @@
               ];
 
               nativeBuildInputs = pkgs.lib.optionals (defaultPalette != null) [ pkgs.makeWrapper ];
-              postInstall = pkgs.lib.optionalString (defaultPalette != null) ''
-                wrapProgram "$out/${pluginId}/${finalAttrs.binaryInstallPath}" \
-                  --set UMBRIEL_CONTROLS_DEFAULT_PALETTE ${pkgs.lib.escapeShellArg defaultPalette}
-              '';
+              postInstall =
+                pkgs.lib.optionalString development ''
+                  manifest="$out/${selectedPluginId}/manifest.json"
+                  ${pkgs.jq}/bin/jq \
+                    --arg from "${pkgs.lib.removeSuffix ".sdPlugin" pluginId}." \
+                    --arg to "${pkgs.lib.removeSuffix ".sdPlugin" devPluginId}." \
+                    '
+                      .Name = "Umbriel Controls (Dev)" |
+                      .Category = "Umbriel Controls (Dev)" |
+                      .Actions |= map(
+                        .UUID |= if startswith($from)
+                          then $to + ltrimstr($from)
+                          else error("Unexpected action UUID: " + .)
+                          end
+                      )
+                    ' "$manifest" > "$manifest.tmp"
+                  mv "$manifest.tmp" "$manifest"
+                ''
+                + pkgs.lib.optionalString (defaultPalette != null) ''
+                  wrapProgram "$out/${selectedPluginId}/${finalAttrs.binaryInstallPath}" \
+                    --set UMBRIEL_CONTROLS_DEFAULT_PALETTE ${pkgs.lib.escapeShellArg defaultPalette}
+                '';
 
               meta = {
                 description = "Stream Deck controls for the Umbriel compositor";
@@ -133,7 +158,10 @@
         in
         {
           default = mkUmbrielControls;
-          dev = mkUmbrielControls.override { buildFeatures = [ "diagnostics" ]; };
+          dev = mkUmbrielControls.override {
+            buildFeatures = [ "diagnostics" ];
+            development = true;
+          };
           noctalia-template = pkgs.writeText "umbriel-controls-noctalia.json.tmpl" (
             builtins.readFile ./noctaliatemplate/umbriel-controls.json.tmpl
           );

@@ -33,6 +33,22 @@ extensions and config:
 codium .
 ```
 
+### Running a development build alongside production
+
+The `.#dev` package builds with diagnostics enabled and installs under a separate plugin
+ID (`dev.moode.umbriel-controls-dev.sdPlugin`). Its action UUIDs and OpenDeck settings
+are separate from the released plugin, so both can be used in the same OpenDeck
+installation without replacing each other.
+
+```sh
+./dev-reload.sh  # Build and reload Umbriel Controls (Dev)
+./dev-unload.sh  # Unlink only the development plugin
+```
+
+The scripts refuse to overwrite a Home Manager-managed plugin or an unrelated
+installation. Changes to the development build do not alter the production package or
+release archives. Both plugins still control the same Umbriel session.
+
 ## Checks before submitting a PR
 
 These are the same Rust checks used by CI's **preflight** job:

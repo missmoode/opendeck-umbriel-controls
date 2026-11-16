@@ -63,7 +63,7 @@ impl ScratchpadToggle {
 
 #[async_trait]
 impl Action for ScratchpadToggle {
-	const UUID: &'static str = "dev.moode.umbriel-controls.scratchpad-toggle";
+	const UUID: &'static str = crate::actions::action_uuid!("scratchpad-toggle");
 
 	type Settings = Settings;
 
