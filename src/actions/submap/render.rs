@@ -241,7 +241,9 @@ mod tests {
 		assert_eq!(current_submap(&disconnected), None);
 		assert_eq!(current_submap(&default), None);
 		assert_eq!(current_submap(&unnamed), Some(""));
-		assert!(ButtonSettings::Reset(ResetSettings::default()).is_active(current_submap(&unnamed)));
+		assert!(
+			ButtonSettings::Reset(ResetSettings::default()).is_active(current_submap(&unnamed))
+		);
 	}
 
 	#[test]

@@ -13,9 +13,9 @@ mod workspaces;
 
 pub use client::Client;
 pub use error::{Error, Result};
-pub use submap::{MAX_SUBMAP_DEPTH, valid_submap_name};
 pub use outputs::Output;
 pub use screencast::ScreencastCommand;
+pub use submap::{MAX_SUBMAP_DEPTH, valid_submap_name};
 pub use subscription::{Event, Subscription};
 pub use windows::Window;
 pub use workspaces::{Workspace, WorkspaceSelector, WorkspaceTarget};

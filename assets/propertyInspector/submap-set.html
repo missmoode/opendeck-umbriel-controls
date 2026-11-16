@@ -9,25 +9,39 @@
   </head>
   <body>
     <div class="uc-inspector-grid">
-      <section class="uc-inspector-section uc-config" aria-labelledby="uc-config-heading">
-        <h2 id="uc-config-heading" class="uc-inspector-heading">Configuration</h2>
+      <section
+        class="uc-inspector-section uc-config"
+        aria-labelledby="uc-config-heading"
+      >
+        <h2 id="uc-config-heading" class="uc-inspector-heading">
+          Configuration
+        </h2>
         <sdpi-item label="Submap path">
           <sdpi-textarea setting="path" rows="5"></sdpi-textarea>
         </sdpi-item>
         <p class="uc-inspector-note">
-          Enter one submap name per line, from outermost to innermost. Pressing the key always
-          clears the previous stack and applies this path. Blank lines are ignored.
-          Names must not be "reset" or "disable", or contain "]".
+          Enter one submap name per line, from outermost to innermost. Pressing
+          the key always clears the previous stack and applies this path. Blank
+          lines are ignored. Names must not be "reset" or "disable", or contain
+          "]".
         </p>
         <p class="uc-inspector-note">
-          The active background reflects the last submap name only. Umbriel's IPC does not
-          currently expose the full path, so it cannot be verified.
+          The active background reflects the last submap name only. Umbriel's
+          IPC does not currently expose the full path, so it cannot be verified.
         </p>
       </section>
-      <section class="uc-inspector-section uc-appearance" aria-labelledby="uc-appearance-heading">
-        <h2 id="uc-appearance-heading" class="uc-inspector-heading">Appearance</h2>
+      <section
+        class="uc-inspector-section uc-appearance"
+        aria-labelledby="uc-appearance-heading"
+      >
+        <h2 id="uc-appearance-heading" class="uc-inspector-heading">
+          Appearance
+        </h2>
         <sdpi-item label="Automatic title">
-          <sdpi-checkbox setting="show_title" label="Use final submap name"></sdpi-checkbox>
+          <sdpi-checkbox
+            setting="show_title"
+            label="Use final submap name"
+          ></sdpi-checkbox>
         </sdpi-item>
         <uc-palette></uc-palette>
       </section>

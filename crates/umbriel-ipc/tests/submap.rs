@@ -75,7 +75,13 @@ type Stack = Arc<Mutex<Vec<String>>>;
 fn mock_submaps(
 	initial: &[&str],
 	fail_on_enter: Option<&'static str>,
-) -> (tempfile::TempDir, Client, Stack, StackRequests, JoinHandle<()>) {
+) -> (
+	tempfile::TempDir,
+	Client,
+	Stack,
+	StackRequests,
+	JoinHandle<()>,
+) {
 	let dir = tempfile::tempdir().unwrap();
 	let socket = dir.path().join("mock-umbriel.sock");
 	let listener = UnixListener::bind(&socket).unwrap();
@@ -97,13 +103,16 @@ fn mock_submaps(
 				Some("submap") => {
 					let current = stack_for_server.lock().unwrap().last().cloned();
 					json!({"ok": current})
-				},
+				}
 				Some("action") => {
 					let name = request["submap"].as_str().unwrap();
 					if name == "reset" {
 						let popped = stack_for_server.lock().unwrap().pop();
-						if popped.is_some() { json!({"ok":null}) }
-						else { json!({"err":"no submap to exit"}) }
+						if popped.is_some() {
+							json!({"ok":null})
+						} else {
+							json!({"err":"no submap to exit"})
+						}
 					} else if Some(name) == fail_on_enter {
 						json!({"err":"simulated push failure"})
 					} else {
@@ -113,7 +122,10 @@ fn mock_submaps(
 				}
 				_ => json!({"err":"unknown command"}),
 			};
-			peer.get_mut().write_all(format!("{response}\n").as_bytes()).await.unwrap();
+			peer.get_mut()
+				.write_all(format!("{response}\n").as_bytes())
+				.await
+				.unwrap();
 		}
 	});
 	(dir, Client::new(socket), stack, requests, task)
@@ -126,7 +138,12 @@ async fn reset_clears_all_layers_including_unnamed() {
 	let (_dir, client, stack, requests, task) = mock_submaps(&["gaming", "", "audio"], None);
 	client.reset_submaps().await.unwrap();
 	assert!(stack.lock().unwrap().is_empty());
-	let pops = requests.lock().unwrap().iter().filter(|r| r.get("submap") == Some(&json!("reset"))).count();
+	let pops = requests
+		.lock()
+		.unwrap()
+		.iter()
+		.filter(|r| r.get("submap") == Some(&json!("reset")))
+		.count();
 	assert_eq!(pops, 3);
 	// Resetting again while already at the default context makes no changes.
 	client.reset_submaps().await.unwrap();
@@ -147,7 +164,10 @@ async fn set_replaces_every_layer_and_repeated_press_does_not_nest() {
 #[tokio::test]
 async fn invalid_path_does_not_clear_existing_stack() {
 	let (_dir, client, stack, requests, task) = mock_submaps(&["existing"], None);
-	assert!(matches!(client.set_submap_path(&["valid", "reset"]).await, Err(Error::InvalidSubmapPath)));
+	assert!(matches!(
+		client.set_submap_path(&["valid", "reset"]).await,
+		Err(Error::InvalidSubmapPath)
+	));
 	assert!(matches!(
 		client.set_submap_path(&[]).await,
 		Err(Error::InvalidSubmapPath)
@@ -174,6 +194,12 @@ async fn excessive_depth_aborts_without_pushing_new_path() {
 		Err(Error::SubmapDepthExceeded(_))
 	));
 	assert_eq!(stack.lock().unwrap().as_slice(), ["layer"]);
-	assert!(!requests.lock().unwrap().iter().any(|r| r.get("submap") == Some(&json!("new"))));
+	assert!(
+		!requests
+			.lock()
+			.unwrap()
+			.iter()
+			.any(|r| r.get("submap") == Some(&json!("new")))
+	);
 	task.abort();
 }

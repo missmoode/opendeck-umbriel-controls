@@ -17,7 +17,8 @@ It has actions for:
 - Switching **workspaces**, and moving windows or columns between them.
 - Cycling through **workspace layouts**.
 - Toggling **scratchpads** (and moving windows in and out of them).
-- Setting complete **keybinding submap** paths and resetting to default, with live state feedback.
+- Setting complete **keybinding submap** paths and resetting to default, with live state
+  feedback.
 - Setting PipeWire **screencast** targets (and pausing sharing).
 - Sending your own **IPC requests via JSON** for anything else.
 
